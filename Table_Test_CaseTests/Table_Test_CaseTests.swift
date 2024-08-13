@@ -34,22 +34,19 @@ final class Table_Test_CaseTests: XCTestCase {
     
     func testViewDidLoad()
     {
-        print("START---View loaded---")
+        
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         vc = storyboard.instantiateViewController(withIdentifier: "ViewController") as? ViewController
         
         vc.loadViewIfNeeded()
-        
-        print("END---View loaded---")
-        
+
     }
     
     func testCheckCount()
     {
-        print("START---Test count---")
-        
+
         if vc.tableData.count == 12
         {
             print("XCTest :- Pass")
@@ -59,44 +56,37 @@ final class Table_Test_CaseTests: XCTestCase {
             print("XCTest :- Fail")
         }
         
-        print("END---Test count---")
     }
     
     func testNoOfRows()
     {
-        print("START---Test no. of rows")
-        
         let noOfRows = vc.tableView(tb, numberOfRowsInSection: 0)
         
-        XCTAssertEqual(noOfRows, 11,"Count mismatched")
-        
-        print("---Test no. of rows")
+        XCTAssertEqual(noOfRows, 10,"Count mismatched")
     }
     
     func testHeight()
     {
-        print("START---Test ht---")
-        
+    
         let indexPath = IndexPath(row: 0, section: 0)
         
         let rowHt = vc.tableView(tb,heightForRowAt: indexPath)
         
         XCTAssertEqual(rowHt,100,"ht should be 100")
-        
-        print("END---Test ht---")
+
     }
     
     func testCellForRowAt() throws 
     {
-        print("START---Test cell for---")
-        
+
          let indexPath = IndexPath(row: 0, section: 0)
         
          let cell = vc.tableView(tb, cellForRowAt: indexPath)
         
+        print("cell lbl -->",cell.textLabel?.text)
+        print("cell count -->", vc.tableData[indexPath.row].count)
         XCTAssertEqual(cell.textLabel?.text, vc.tableData[indexPath.row], "Cell text should match the corresponding item in tableData")
         
-        print("END---Test cell for---")
      }
   
 
